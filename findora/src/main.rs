@@ -226,6 +226,9 @@ fn fund_accounts(
     }else if (count as usize) < source_keys.len()
     {
         source_keys.truncate(count as usize);
+        std::fs::rename("source_keys.001", ".source_keys.001.bak").unwrap();
+        let data = serde_json::to_string(&source_keys).unwrap();
+        std::fs::write("source_keys.001", &data).unwrap();
     }
 
 
